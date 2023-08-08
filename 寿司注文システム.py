@@ -8,7 +8,7 @@ win.geometry('2000x1000')
 win.configure(bg='white')
 win.title('寿司注文')
 
-ip1 = '192.168.2.185'
+ip1 = 'ここにはラインに送信されたipを入力してください'
 
 port1 = 8765
 server = (ip1, port1)
