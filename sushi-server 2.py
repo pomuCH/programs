@@ -8,8 +8,7 @@ socket1.bind((ip, port1))
 socket1.listen(5)
 
 url_line = "https://notify-api.line.me/api/notify"
-#token = "2qKp0QC8uJ5KOCC2RAGuHdrlftKLIkQE8uVaB02AzqD"
-token = "cxMgm6FhMpaQfAUztmdTG1IXQPlGAsNrCFi24uRJQbr"
+token = "ここには取得したAPIキーを入力してください"
 headers = {"Authorization" : "Bearer "+ token}
 message =  ip
 payload = {"message" :  message}
@@ -39,7 +38,7 @@ while True:
         print('サーモンを注文')
         cnt +=10
         url_line = "https://notify-api.line.me/api/notify"
-        token = "cxMgm6FhMpaQfAUztmdTG1IXQPlGAsNrCFi24uRJQbr"
+        token = "ここには取得したAPIキーを入力してください"
         headers = {"Authorization" : "Bearer "+ token}
         message =  'サーモン'
         payload = {"message" :  message}
@@ -48,7 +47,7 @@ while True:
         print('マグロを注文')
         cnt +=10
         url_line = "https://notify-api.line.me/api/notify"
-        token = "cxMgm6FhMpaQfAUztmdTG1IXQPlGAsNrCFi24uRJQbr"
+        token = "ここには取得したAPIキーを入力してください"
         headers = {"Authorization" : "Bearer "+ token}
         message =  'マグロ'
         payload = {"message" :  message}
@@ -57,7 +56,7 @@ while True:
         print('タコを注文')
         cnt +=10
         url_line = "https://notify-api.line.me/api/notify"
-        token = "cxMgm6FhMpaQfAUztmdTG1IXQPlGAsNrCFi24uRJQbr"
+        token = "ここには取得したAPIキーを入力してください"
         headers = {"Authorization" : "Bearer "+ token}
         message =  'タコ'
         payload = {"message" :  message}
@@ -66,7 +65,7 @@ while True:
         print('エビを注文')
         cnt +=10
         url_line = "https://notify-api.line.me/api/notify"
-        token = "cxMgm6FhMpaQfAUztmdTG1IXQPlGAsNrCFi24uRJQbr"
+        token = "ここには取得したAPIキーを入力してください"
         headers = {"Authorization" : "Bearer "+ token}
         message =  'エビ'
         payload = {"message" :  message}
@@ -75,7 +74,7 @@ while True:
         print('カンパチを注文')
         cnt +=10
         url_line = "https://notify-api.line.me/api/notify"
-        token = "cxMgm6FhMpaQfAUztmdTG1IXQPlGAsNrCFi24uRJQbr"
+        token = "ここには取得したAPIキーを入力してください"
         headers = {"Authorization" : "Bearer "+ token}
         message =  'カンパチ'
         payload = {"message" :  message}
@@ -84,7 +83,7 @@ while True:
         print('タイを注文')
         cnt +=10
         url_line = "https://notify-api.line.me/api/notify"
-        token = "cxMgm6FhMpaQfAUztmdTG1IXQPlGAsNrCFi24uRJQbr"
+        token = "ここには取得したAPIキーを入力してください"
         headers = {"Authorization" : "Bearer "+ token}
         message =  'タイ'
         payload = {"message" :  message}
@@ -92,7 +91,7 @@ while True:
     if num==7:
         print(f'お会計{cnt*10}円')
         url_line = "https://notify-api.line.me/api/notify"
-        token = "cxMgm6FhMpaQfAUztmdTG1IXQPlGAsNrCFi24uRJQbr"
+        token = "ここには取得したAPIキーを入力してください"
         headers = {"Authorization" : "Bearer "+ token}
         message =  f'お会計{cnt*10}円'
         payload = {"message" :  message}
