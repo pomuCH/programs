@@ -1,0 +1,199 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      // サイズを指定
+      const width = 1500;
+      const height = 700;
+
+      // レンダラーを作成
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector("#myCanvas"),
+        antialias: true,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+      // レンダラー側で影を有効に
+      renderer.shadowMap.enabled = true;
+
+      // シーンを作成
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xbbbbbb)
+
+      // カメラを作成
+      const camera = new THREE.OrthographicCamera(-500, +600, 650,100,1, 1000);
+
+      // 光源を作成
+      {
+        const spotLight = new THREE.SpotLight(0xffffff, 4, 2000000, Math.PI / 5, 0.2, 1.5);
+        spotLight.position.set(1000, 1000, 1000);
+        spotLight.castShadow = true; // 影を落とす設定
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+        scene.add(spotLight);
+        /*const spotLight2 = new THREE.SpotLight(0xffffff, 4, 2000000, Math.PI / 5, 0.2, 1.5);
+        spotLight2.position.set(-600, 600, -600);
+        spotLight2.castShadow = true; // 影を落とす設定
+        spotLight2.shadow.mapSize.width = 1024;
+        spotLight2.shadow.mapSize.height = 1024;
+        scene.add(spotLight2);*/
+      }
+
+      // 地面を作成
+      {
+        // 床のテクスチャー
+        const texture = new THREE.TextureLoader().load("imgs/floor.png");
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping; // リピート可能に
+        texture.repeat.set(0,0,0);
+        texture.magFilter = THREE.NearestFilter; // アンチエイリアスを外す
+
+        const floor = new THREE.Mesh(
+          new THREE.PlaneGeometry(2000,2000),
+          new THREE.MeshStandardMaterial({
+            map: texture,
+            roughness: 0.0,
+            metalness: 0,
+          })
+        );
+        floor.rotation.x = -Math.PI / 2;
+        floor.receiveShadow = true; // 影の設定
+        scene.add(floor);
+      }
+
+      // マス目を作成
+      {
+        // 立方体のマテリアルとジオメトリを作成
+        const material = new THREE.MeshStandardMaterial({
+          color: 0x00ffff,
+          roughness: 0,//現実的な荒さ
+          metalness: 0,//金属度
+        });
+        const geometry = new THREE.BoxGeometry(30,30,30);
+        
+        //  ||(H)
+        for (let i=0; i<30; i++){
+          const box = new THREE.Mesh(geometry, material);
+          if (i<15){
+            box.position.x = 150;
+            box.position.y = 250 + i*20;
+            box.position.z = 300;
+          }else{
+            box.position.x = 150;
+            box.position.y = 250 + (29-i)*20;
+            box.position.z = 180;
+          }
+          box.receiveShadow = true;
+          box.castShadow = true;
+          scene.add(box);
+        }
+        // -(H)
+        for (let i=0; i<5; i++){
+          const box = new THREE.Mesh(geometry, material);
+          box.position.x = 150;
+          box.position.y = 390;
+          box.position.z = 300 - i*30;
+          box.receiveShadow = true;
+          box.castShadow = true;
+          scene.add(box);
+        }
+        // -(T)
+        for (let i=0; i<6;i++){
+          const box = new THREE.Mesh(geometry, material);
+          box.position.x = 150;
+          box.position.y = 530;
+          box.position.z = 100 - i*30;
+          box.receiveShadow = true;
+          box.castShadow = true;
+          scene.add(box);
+        }
+        // |(T)
+        for (let i=0; i<15; i++){
+          const box = new THREE.Mesh(geometry, material);
+          box.position.x = 150;
+          box.position.y = 530 - i*20;
+          box.position.z = 25;
+          box.receiveShadow = true;
+          box.castShadow = true;
+          scene.add(box);
+        }
+        // ||(M)
+        for (let i=0; i<30; i++){
+          const box = new THREE.Mesh(geometry, material);
+          if (i<15){
+            box.position.x = 150;
+            box.position.y = 530 - i*20;
+            box.position.z = -130;
+          }else{
+          box.position.x = 150;
+          box.position.y = 530 - (29-i)*20;
+          box.position.z = -250;
+          }
+          box.receiveShadow = true;
+          box.castShadow = true;
+          scene.add(box);
+        }
+        // \/(M)
+        for (let i=0; i<300; i++){
+          const box = new THREE.Mesh(geometry, material);
+          if(i<150){
+            box.position.x = 150;
+            box.position.y = 530 - i*(7/5);
+            box.position.z = -130 - i*(1/3);
+          }else{
+            box.position.x= 150;
+            box.position.y= 530 - (299-i)*(7/5);
+            box.position.z= -250 + (299-i)*(1/3);
+          }
+          box.receiveShadow = true;
+          box.castShadow = true;
+          scene.add(box);
+        }
+        // |(L)
+        for (let i=0; i<18; i++){
+          const box = new THREE.Mesh(geometry, material);
+          if(i<15){
+            box.position.x = 150;
+            box.position.y = 530 - i*20;
+            box.position.z = -330;
+          }else{
+            box.position.x= 150;
+            box.position.y= 250;
+            box.position.z= -330 - (18-i)*20;
+          }
+          box.receiveShadow = true;
+          box.castShadow = true;
+          scene.add(box);
+        }
+        // C
+      }
+
+      tick();
+
+      // 毎フレーム時に実行されるループイベントです
+      function tick() {
+        // 角度に応じてカメラの位置を設定
+        camera.position.x = 500 * Math.sin(Date.now() / 2000);
+        camera.position.y = 100;
+        camera.position.z = 500 * Math.cos(Date.now() / 2000);
+
+        // 原点方向を見つめる
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // レンダリング
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>
