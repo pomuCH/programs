@@ -37,8 +37,8 @@ def d_cal(a,b):
     # a>bの関係にしておく
     a,b = (b,a) if abs(a)<abs(b) else (abs(a),abs(b))
 
-    pre_x, now_x = 0,1     # xの値は、最初は1
-    pre_y, now_y = 1,0     # yの値は、最初は商x(-1)
+    pre_x, now_x = 0,1     # xの値は、最初は商x(-1)
+    pre_y, now_y = 1,0     # yの値は、最初は1
 
     while True:
         # 商
