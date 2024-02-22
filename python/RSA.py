@@ -1,6 +1,5 @@
 #codeing : utf-8
 import random
-import sys
 
 def gcd(a, b): #gcd = greatest common divisor (最大公約数)
   while b:
@@ -20,10 +19,6 @@ def lcm(a,b): #最小公倍数 (lcm) = a*b/最大公約数 (gcd)
   return a * b / gcd(a,b)
 
 def encode(m): #暗号化
-  mmm=list(m)
-  for i in range(0,int(len(mmm))):
-    byte.append(mmm[i].encode('utf8'))
-    num_byte.append(len(byte[i]))
   mm=list(m.encode("utf8"))
   integer=mm
   #print(f'UNコード化={integer}')
@@ -68,6 +63,7 @@ def adjust(a,b):
       break
     i+=1
   return x, y
+
 j=1
 i=1
 p=101  #p<q
@@ -76,14 +72,10 @@ n=p*q
 e=tagainiso((p-1)*(q-1))
 k_1=e[random.randint(1,int(len(e))-1)]
 # ex -  Ly = 1
-#a=3
-#b=-20
+
 a = k_1
 b = (p-1)*(q-1)
 xx,y = d_cal(a,b)
-#print(f'a={a},b={b}')
-#print(f'ax - by = {a*xx-b*y}')
-
 if (a*xx-b*y)==-1:
   xxx,yy=adjust(xx,y)
 else:
@@ -92,23 +84,14 @@ print(f"params:p = {p} , q = {q} , n = {n} ,  e = {k_1} , L = {(p-1)*(q-1)} , d 
 print(f"公開鍵 = {n} , {k_1}")
 k_2=xxx
 m=str(input('入力 >>> '))
-byte=[]
-num_byte=[]
 integer = []
 c=[]
 encode(m)
-#print(num_byte)
-for i in range(0,len(integer)):
-  if integer[i]>n:
-    sys.exit(f"メッセージのバイナリが素数の積を超過したため、計算不可 n={n},m={integer[i]}")
 print(f'暗号文 = {c}')
-#print(f'n={n}')
 
 ###複合
 x=[0]*len(c)
 for i in range(0,int(len(c))):
     x[i]=(c[i]**k_2)%n
-#print(x)
-message=""
 result = bytes(x).decode("utf8")
 print(f'復号文 = {result}')
