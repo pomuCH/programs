@@ -1,7 +1,6 @@
 import socket
 import random
 import pickle
-import time
 
 ip = socket.gethostbyname(socket.gethostname())
 port1=8765
