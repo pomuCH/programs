@@ -2,8 +2,8 @@ import socket
 import random
 import pickle
 
-ip1 = '192.168.2.113'
-#ip1 = str(input("ipアドレス>>>"))
+#ip1 = '192.168.2.113'
+ip1 = str(input("ipアドレス>>>"))
 port1 = 8765
 server = (ip1, port1)
 
