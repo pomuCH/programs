@@ -22,7 +22,7 @@ def tagainiso(num):
   for i in range (1,num+1):
     if gcd(num,i)==1:
       totient.append(i)
-    if i>10:
+    if i>100:
       break
   return totient
 
